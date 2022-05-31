@@ -60,16 +60,16 @@ Also we have plotted graph to easily compare which type of comuption better for 
 
 ## Description of code files
 
-luserial.cpp &emsp;    -       contains c++ code for serial execution for LU decompostion <br />
-luomp.cpp       -       contains c++ code for parellel execution using OpenMP library <br />
-luthread.cpp    -       contains c++ code for parellel execution using Pthread <br />
-Makefile        -       contains program which helps us to compile all above code at once. <br />
-LU_Serial_Output.txt -  contains result(time) for executon of different sizes  for serial code. <br />
-LUOmp_Output.txt  -     contains result(time) for executon of different size matrices for Parllel excution using OpenMP. <br />
-threadOutput.txt  -     contains result(time) for executon of different size matrices for Parllel excution using Pthread. <br />
-bar_chart.py  -         Code for reading above three text file and plotting a bar graph. <br />
-line_plot.py  -         Code for reading above three text file and plotting a line plot.  <br />
-bash.sh      -          Files runs the bash script, which automates the whole process and saves results for plotting graphs for analyises. <br />
+luserial.cpp &emsp;    -   &emsp;    contains c++ code for serial execution for LU decompostion <br />
+luomp.cpp   &emsp;    -    &emsp;   contains c++ code for parellel execution using OpenMP library <br />
+luthread.cpp   &emsp; -   &emsp;    contains c++ code for parellel execution using Pthread <br />
+Makefile     &emsp;   -  &emsp;     contains program which helps us to compile all above code at once. <br />
+LU_Serial_Output.txt - &emsp; contains result(time) for executon of different sizes  for serial code. <br />
+LUOmp_Output.txt  -   &emsp;  contains result(time) for executon of different size matrices for Parllel excution using OpenMP. <br />
+threadOutput.txt  - &emsp;    contains result(time) for executon of different size matrices for Parllel excution using Pthread. <br />
+bar_chart.py &emsp;  -  &emsp;       Code for reading above three text file and plotting a bar graph. <br />
+line_plot.py &emsp; -  &emsp;       Code for reading above three text file and plotting a line plot.  <br />
+bash.sh     &emsp; -   &emsp;       Files runs the bash script, which automates the whole process and saves results for plotting graphs for analyises. <br />
 
 
 ## Results
