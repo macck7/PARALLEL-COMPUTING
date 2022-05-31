@@ -33,5 +33,5 @@ done
 
 sleep 5
 
-python3 2.py
-python3 1.py
+python3 bar_chart.py
+python3 line_plot.py
