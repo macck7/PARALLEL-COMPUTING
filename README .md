@@ -2,6 +2,8 @@
 
 This project consists of two LU decomposition implementations that employ Gaussian elimination to factor a dense **N x N** matrix into an upper-triangular and lower-triangular one. Pivoting is the process of finding the biggest magnitude value in a row, column, or both in a matrix and then swapping rows and/or columns in the matrix for the next step in the algorithm. Pivoting is used to eliminate round-off error and increase numerical stability. Row pivoting, a type of pivoting that includes interchanging rows of a trailing submatrix based on the biggest value in the current column, is used in this project. To execute LU decomposition with row pivoting, a permutation matrix P must be computed with PA = LU.The row exchanges are recorded in the permutation matrix.
 
+![image](https://raw.githubusercontent.com/macck7/Parllel-and-Distributed-system/main/LU.png)
+
 ### Pseudo Code
 ```
 Below is pseudocode for a sequential implementation of LU decomposition with row pivoting.
