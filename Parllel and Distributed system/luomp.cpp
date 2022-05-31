@@ -5,12 +5,12 @@ using namespace std;
 using namespace std::chrono;
 
 
-int  MATRIX_SIZE; 
+int MATRIX_SIZE; 
 int NUM_THREADS;
 int k1;
-int k_dash1;
+int k;
 
-#define MAX 1000
+#define MAX 3000
 
 
 
@@ -22,7 +22,26 @@ double p[MAX];
 
 
 
-
+int get_maximum_element_index( int c, int r1, int r2)
+{
+	double max_element=0;
+	int index=-1;
+	for(int i= r1; i<= r2; i++)
+	{
+		double temp = abs(matrix[i][c]);
+		if(temp > max_element)
+		{
+			max_element = temp;
+			index = i;
+		}
+	}
+	if(max_element == 0)
+	{
+		cout << "Error - singular matrix. Column "<<c<<" is all zeroes"<<endl;
+		return -1;
+	}
+	return index;
+}
 int main(int argc, char *argv[])
 {
         
@@ -36,27 +55,16 @@ int main(int argc, char *argv[])
         
 
 	struct drand48_data buffer;
+	srand48_r((long int)time(0), &buffer);
        // intialisation of matrix
         
-     
- #pragma omp parallel for num_threads(NUM_THREADS) schedule(static, 4) collapse(2) 
-	for(int i=1; i<=n ; i++)
-	    {
-		for(int j=1; j<=n; j++)
-                #pragma omp critical
-		   {
-			drand48_r( &buffer, &(matrix[i][j]) );
-			matrix[i][j] *= 1000;
-			matrix_dup[i][j] = matrix[i][j];
-		   }
-	    }
-      	
-
 #pragma omp parallel num_threads(NUM_THREADS)
-  {
+  
+  {    
+       
     #pragma omp sections
      {
-       
+         
      #pragma omp section
 	{ 
 	// intialisation of permutation
@@ -100,20 +108,29 @@ int main(int argc, char *argv[])
 		
 	}
       }
-    }  
+    }
+    
+    #pragma omp for schedule(static, 4) collapse(2)
+	for(int i=1; i<=n ; i++)
+	    {
+		for(int j=1; j<=n; j++)
+		   {
+			drand48_r( &buffer, &(matrix[i][j]) );
+			matrix[i][j] *= 1000;
+			matrix_dup[i][j] = matrix[i][j];
+		   }
+	    }
+       
  }
 
 
 
-   int k1 = -1;
-   int k=1,mx;
-   for( k=1 ; k<=n ; k++)
+  
+   for(int k=1 ; k<=n ; k++)
      {
-            mx=0;
-            #pragma omp single
-            {
-		
-		for(int i=k; i<=n ; i++)
+  //          mx=0;
+    
+/*	    for(int i=k; i<=n ; i++)
 		{
 		      
 			if(mx< matrix[i][k])
@@ -122,59 +139,67 @@ int main(int argc, char *argv[])
 				k1=i;
 			}
 		}
-	    }
-	         if(mx==0)
-	         cout<<"singular matrix"<<endl;
-	         
-                swap(p[k], p[k1]);
-             
-             
-             
-             
-              #pragma omp parallel for num_threads(NUM_THREADS) schedule(static, 4) 
+*/
+
+               int k1 = get_maximum_element_index(k, k, n);
+		if(k1 == -1)
+		{
+			cout << "Singular matrix.\n";
+			return 0;
+		}	    
+	
+	  #pragma omp parallel for num_threads(NUM_THREADS) schedule(static, 4)     
                for( int i=1; i<=n; i++) 
                  {
                       swap(matrix[k][i], matrix[k1][i]);
                  }
-               
-                  
-             #pragma omp parallel for num_threads(NUM_THREADS) schedule(static, 4) 
+                 
+                 
+                swap(p[k], p[k1]);
+                u[k][k]=matrix[k][k];
+            
+            
+    #pragma omp parallel num_threads(NUM_THREADS)
+         {
+		
+		#pragma omp for schedule(static, 4) nowait 
                for(int  i=1; i<=k; i++) 
                  {
                       swap(l[k][i], l[k1][i]);
                  }
-			
-                 u[k][k]=matrix[k][k];
-                  
-               
-             #pragma omp parallel for num_threads(NUM_THREADS) schedule(static, 4)    
+	      
+                 
+                 
+              #pragma omp for schedule(static, 4) 
 	        for(int i=k+1; i<=n ; i++)
 	        { 
 	            
 		    l[i][k]=matrix[i][k]/u[k][k];
-		    
 		    #pragma omp critical
-		    
 		    {
 		       u[k][i]=matrix[k][i];
 	            }
 	            
 	        }
-        
-            #pragma omp parallel for num_threads(NUM_THREADS) schedule(static) collapse(2) 
+	        
+	      #pragma omp for schedule(static, 4)  
 	       for(int i = k+1; i<=n ; i++)
 	       {
+	             double lm = l[i][k];
 		     for(int j = k+1; j<=n ; j++)
 		       {
-	          #pragma omp atomic
-		           matrix[i][j] = matrix[i][j] - l[i][k]*u[k][j];
+		           matrix[i][j] = matrix[i][j] - lm*u[k][j];
 		        }
 	       }
-        }
-  
-/* 	
-   
-        printf("Original matrix\n");
+	     
+        
+       }
+      
+   }	
+
+/*
+ 
+    printf("Original matrix\n");
     
     for(int i=1; i<=n; i++)
 	{
@@ -246,8 +271,8 @@ int main(int argc, char *argv[])
     }
 
 	printf("\n");printf("\n");
-
-*/	
+*/
+	
 	// getting the end time
 	auto end_time = high_resolution_clock::now();
 	// get the duration
@@ -256,7 +281,7 @@ int main(int argc, char *argv[])
 	cout << "Time taken: " << duration_time.count()/1000000.0 << " seconds" << endl;
 	
 	ofstream myfile;
-    	myfile.open ("ompOutput.txt", ios::app);
+    	myfile.open ("LUOmp_Output.txt", ios::app);
     	myfile << n<<","<<duration_time.count()/1000000.0  << endl;
     	myfile.close();
 

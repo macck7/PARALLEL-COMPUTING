@@ -21,7 +21,7 @@ int MAX_THREAD;
 int k1;
 int k_dash1;
 
-#define MAX 2000
+#define MAX 3000
 
 double matrix[MAX][MAX];
 double matrix_dup[MAX][MAX];
@@ -44,7 +44,6 @@ void* multi(void* arg)
 	pthread_mutex_unlock( &mut );
 
 
-	
     	int k=k1;int k_dash=k_dash1;
 	int ceil_1 = ceil( ( (k*(1.0)) / MAX_THREAD ) );
 	int ceil_2 = ceil( ( ((MATRIX_SIZE-k-1)*(1.0)) / MAX_THREAD ) );
@@ -56,7 +55,7 @@ void* multi(void* arg)
 	e2 = e2  > (MATRIX_SIZE) ? (MATRIX_SIZE) : e2;
 
 
-	//we are swaping k-1 elements of row numbers k and k_dash in the lower matrix
+
 	for(int i=s1; i<e1; i++)
 	{
 		swap(l[k][i],l[k_dash][i]);		
@@ -134,9 +133,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	
 
-	pthread_barrier_init(&barrier, NULL, MAX_THREAD);
 
 	pthread_barrier_init(&barrier, NULL, MAX_THREAD);
 	pthread_t threads[MAX_THREAD];
@@ -194,12 +191,12 @@ int main(int argc, char *argv[])
         	}
 
 
-		u[k][k]=matrix[k][k];
+		u[k][k]=matrix[k][k];   //Diagonal element
 
 		
 		//creating threads for parallel computations
 
-        	k1=k;k_dash1=k_dash;
+        k1=k;k_dash1=k_dash;
 		for(int i=0; i<MAX_THREAD; i++){
 			int *pi;
 			pthread_create(&threads[i], NULL, multi, (void *)(pi));
@@ -213,11 +210,11 @@ int main(int argc, char *argv[])
 		step_i = 0;
 	}
 
-/*
+
 
 	// printing decompostions 
 
-
+/*
 	for( int i=0 ;i<n ;i++){
 		for( int j=0 ;j<n ; j++){
 			cout<<matrix[i][j]<<" ";
@@ -266,9 +263,7 @@ int main(int argc, char *argv[])
  
         cout << endl;
     }
-
 */
-
 	// getting the end time
 	auto end_time = high_resolution_clock::now();
 	// get the duration

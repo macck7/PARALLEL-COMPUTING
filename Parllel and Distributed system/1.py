@@ -8,7 +8,7 @@ x=[]
 y=[]
 z=[]
 
-file1 = open("serialOutput.txt","r")
+file1 = open("LU_Serial_Output.txt","r")
 for i in file1.readlines():
 	a=i.split(',')
 	xwale.append(a[0])
@@ -29,7 +29,7 @@ new_yy = [float(i) for i in new_y]
 
 
 
-file3 = open("ompOutput.txt","r")
+file3 = open("LUOmp_Output.txt","r")
 for i in file3.readlines():
 	a=i.split(',')
 	z.append(a[1])

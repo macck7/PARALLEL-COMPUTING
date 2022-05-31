@@ -4,34 +4,34 @@ g++ -fopenmp luomp.cpp -o luomp
 g++ -pthread luthread.cpp -o luthread
 
 
-x=10
-while [ $x -le 1000 ]
+x=100
+while [ $x -le 2000 ]
 do
   ./luserial $x
 
-  x=$(( $x + 50 ))
+  x=$(( $x + 100 ))
 done
 
 
-y=10
-while [ $y -le 1000 ]
+y=100
+while [ $y -le 2000 ]
 do
-  ./luomp $y 2
+  ./luomp $y 4
 
-  y=$(( $y + 50 ))
+  y=$(( $y + 100 ))
 done
 
 
 
-z=10
-while [ $z -le 1000 ]
+z=100
+while [ $z -le 2000 ]
 do
   ./luthread $z 4
 
-  z=$(( $z + 50 ))
+  z=$(( $z + 100 ))
 done
 
 sleep 5
 
-python 2.py
-python 1.py
+python3 2.py
+python3 1.py
