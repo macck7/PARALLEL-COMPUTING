@@ -71,4 +71,5 @@ bash.sh      -          Files runs the bash script, which automates the whole pr
 
 
 ## Results
+![image](https://raw.githubusercontent.com/macck7/Parllel-and-Distributed-system/main/bar_graph.png)
 ![image](https://raw.githubusercontent.com/macck7/Parllel-and-Distributed-system/main/line_plot.png)
