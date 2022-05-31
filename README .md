@@ -38,9 +38,9 @@ Below is pseudocode for a sequential implementation of LU decomposition with row
 ```
 
 ## OpenMP
-Open Multi-processing (OpenMP) is a technique of parallelizing a section(s) of code in C/C++ languages. OpenMP is also seen as an extension to C/C++ languages by adding the parallelizing features to them.
-In general, OpenMP uses a portable, scalable model that gives programmers a simple and flexible interface for developing parallel applications for platforms that ranges from the normal desktop computer to the high-end supercomputers.
-In OpenMP, Before running the code, we can initialise the number of threads to be executed using the following command. Here, we set the number of threads to be getting executed to be 8 threads.
+Open Multi-processing (OpenMP) is a technique of parallelizing a section(s) of code in C/C++ languages. OpenMP is also seen as an extension to C/C++ languages by adding the parallelizing features to them. <br />
+In general, OpenMP uses a portable, scalable model that gives programmers a simple and flexible interface for developing parallel applications for platforms that ranges from the normal desktop computer to the high-end supercomputers. <br />
+In OpenMP, Before running the code, we can initialise the number of threads to be executed using the following command. Here, we set the number of threads to be getting executed to be 8 threads. <br />
 export OMP_NUM_THREADS=8
 
 
@@ -49,11 +49,11 @@ C/C++ languages provide the POSIX thread(pthread) standard API(Application progr
 
 
 ## Flow of Control
-First of all we have 3 inpedent file which are responsible for serial and parellel processing.
-Serial compution is done with the help of seiral.cpp  which it takes whole input matrix and process sequentionlly one by one.
-Parllel computation is done with the help oh OpenMP and Pthread. 
-After complie all three .cpp codes we have passed different sizes of matrixes to all three file in order to observare the computation time.
-Also we have plotted graph to easily compare which type of comuption better for different size.
+First of all we have 3 inpedent file which are responsible for serial and parellel processing. <br />
+Serial compution is done with the help of seiral.cpp  which it takes whole input matrix and process sequentionlly one by one. <br />
+Parllel computation is done with the help oh OpenMP and Pthread.  <br />
+After complie all three .cpp codes we have passed different sizes of matrixes to all three file in order to observare the computation time. <br />
+Also we have plotted graph to easily compare which type of comuption better for different size. <br />
 
 
 ## Description of code files
