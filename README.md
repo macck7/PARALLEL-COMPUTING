@@ -60,7 +60,7 @@ Also we have plotted graph to easily compare which type of comuption better for 
 
 ## Description of code files
 
-luserial.cpp    -       contains c++ code for serial execution for LU decompostion <br />
+luserial.cpp &emsp;    -       contains c++ code for serial execution for LU decompostion <br />
 luomp.cpp       -       contains c++ code for parellel execution using OpenMP library <br />
 luthread.cpp    -       contains c++ code for parellel execution using Pthread <br />
 Makefile        -       contains program which helps us to compile all above code at once. <br />
