@@ -75,3 +75,7 @@ bash.sh    -         Files runs the bash script, which automates the whole proce
 ## Results
 ![image](https://raw.githubusercontent.com/macck7/Parllel-and-Distributed-system/main/bar_graph.png)
 ![image](https://raw.githubusercontent.com/macck7/Parllel-and-Distributed-system/main/line_plot.png)
+
+## Some of the observation when matrix multiplication performed with different approaches 
+
+![image](https://github.com/macck7/PARALLEL-COMPUTING/blob/main/results.png)
